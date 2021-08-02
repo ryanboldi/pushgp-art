@@ -1,4 +1,4 @@
-(ns genetic-programming-art.core
+(ns pushgp-art.core
   (:require [quil.core :as q]
             [quil.middleware :as m]))
 
