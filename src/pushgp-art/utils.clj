@@ -1,7 +1,9 @@
 (ns pushgp-art.utils
   (:require [propeller.genome :as genome]
             [propeller.push.interpreter :as interpreter]
-            [propeller.push.state :as state]))
+            [propeller.push.state :as state]
+            [propeller.push.instructions.numeric]
+            [propeller.push.instructions.input-output]))
 
 (def population-size 9)
 (def max-initial-plushy-size 100)
@@ -36,9 +38,11 @@ random-plushy
 
 (def push-program (genome/plushy->push random-plushy))
 
-(interpreter/interpret-program 
- (genome/plushy->push random-plushy)
- (assoc state/empty-state :input {:in1 0 :in2 1})
+push-program
+
+(interpreter/interpret-program
+ push-program
+ (assoc state/empty-state :input {:in1 0.0 :in2 1.0})
  100)
 
 (defn plushy->image [plushy])
