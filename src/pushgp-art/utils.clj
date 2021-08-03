@@ -3,7 +3,10 @@
             [propeller.push.interpreter :as interpreter]
             [propeller.push.state :as state]
             [propeller.push.instructions.numeric]
-            [propeller.push.instructions.input-output]))
+            [propeller.push.instructions.input-output]
+            [propeller.push.instructions.code]
+            [propeller.push.instructions.polymorphic]
+            [quil.core :as q]))
 
 (def population-size 9)
 (def max-initial-plushy-size 100)
@@ -40,9 +43,20 @@ random-plushy
 
 push-program
 
-(interpreter/interpret-program
+(state/peek-stack (interpreter/interpret-program
  push-program
- (assoc state/empty-state :input {:in1 0.0 :in2 1.0})
- 100)
+ (assoc state/empty-state :input {:in1 256 :in2 256})
+ 100) :float)
 
-(defn plushy->image [plushy])
+(defn plushy->image [plushy]
+  (let [push-program (genome/plushy->push plushy)
+        im (q/create-image 100 100 :alpha)]
+    (dotimes [x 100]
+      (dotimes [y 100]
+        (q/set-pixel im x y (q/color (state/peek-stack 
+                                      (interpreter/interpret-program
+                                        push-program
+                                        (assoc state/empty-state :input {:in1 x :in2 y})
+                                        100)
+                                            :float)))))
+    im))
