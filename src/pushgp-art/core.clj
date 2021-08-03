@@ -11,12 +11,22 @@
   ; setup function returns initial state. It contains
   ; circle color and position.
   {:color 0
-   :angle 0})
+   :angle 0}
+  )
 
 (defn draw [_]
   (q/background 255)
-  ; create image and draw gradient on it
-  (q/image (utils/plushy->image (utils/random-plushy)) 0 0))
+(let [im1 (utils/plushy->image (utils/random-plushy))
+      im2 (utils/plushy->image (utils/random-plushy))
+      im3 (utils/plushy->image (utils/random-plushy))
+      im4 (utils/plushy->image (utils/random-plushy))
+      im5 (utils/plushy->image (utils/random-plushy))]
+  (q/image im1 0 0)
+  (q/image im2 100 0)
+  (q/image im3 200 0)
+  (q/image im4 300 0)
+  (q/image im5 400 0))
+  (q/no-loop))
 
 
 (q/defsketch pushgp-art
