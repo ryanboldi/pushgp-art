@@ -33,7 +33,7 @@
       (q/ellipse x y 100 100))))
 
 
-(q/defsketch genetic-programming-art
+(q/defsketch pushgp-art
   :title "You spin my circle right round"
   :size [500 500]
   ; setup function called only once, during sketch initialization.
