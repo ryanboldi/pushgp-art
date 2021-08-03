@@ -16,11 +16,11 @@
 (defn draw [_]
   (q/background 255)
   ; create image and draw gradient on it
-  (q/image (utils/plushy->image utils/random-plushy) 0 0))
+  (q/image (utils/plushy->image (utils/random-plushy)) 0 0))
 
 
 (q/defsketch pushgp-art
-  :title "You spin my circle right round"
+  :title "PushGP Art"
   :size [500 500]
   ; setup function called only once, during sketch initialization.
   :setup setup

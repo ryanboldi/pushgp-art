@@ -35,7 +35,7 @@
                       instructions
                       max-initial-plushy-size)))
 
-(def random-plushy (genome/make-random-plushy instructions max-initial-plushy-size))
+(defn random-plushy [] (genome/make-random-plushy instructions max-initial-plushy-size))
 
 random-plushy
 
@@ -53,10 +53,13 @@ push-program
         im (q/create-image 100 100 :alpha)]
     (dotimes [x 100]
       (dotimes [y 100]
-        (q/set-pixel im x y (q/color (state/peek-stack 
-                                      (interpreter/interpret-program
-                                        push-program
-                                        (assoc state/empty-state :input {:in1 x :in2 y})
-                                        100)
-                                            :float)))))
+        (let [normalized-x (float (/ x 100))
+              normalized-y (float (/ y 100))
+              output (state/peek-stack
+                      (interpreter/interpret-program
+                       push-program
+                       (assoc state/empty-state :input {:in1 normalized-x :in2 normalized-y})
+                       100)
+                      :float)]
+          (q/set-pixel im x y (q/color (* output 255))))))
     im))
