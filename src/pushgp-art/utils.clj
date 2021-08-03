@@ -9,20 +9,23 @@
             [quil.core :as q]))
 
 (def population-size 9)
-(def max-initial-plushy-size 100)
+(def max-initial-plushy-size 1000)
 
 
 (def instructions
   (list :in1
         :in2
-        :integer_add
-        :integer_subtract
-        :integer_mult
-        :integer_quot
+        :float_add
+        :float_subtract
+        :float_mult
+        :float_quot
         :float_sin
         :float_cos
         :float_tan
-        :float_from_integer
+        :float_min
+        :float_max
+        :float_lt
+        :float_gt
         :exec_dup
         :exec_if
         'close
