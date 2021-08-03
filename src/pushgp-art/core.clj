@@ -17,10 +17,10 @@
   ; create image and draw gradient on it
   (let [im (q/create-image 256 256 :alpha)]
     (dotimes [x 256]
-      (dotimes [y 256] (q/set-pixel im x y (+ x y)))
+      (dotimes [y 256] (q/set-pixel im x y (q/color 256))))
       (q/update-pixels im)
     ; draw image twice
-      (q/image im 0 0))))
+      (q/image im 0 0)))
 
 
 (q/defsketch pushgp-art
