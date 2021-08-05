@@ -6,7 +6,7 @@ Using the Push Genetic Programming system to evolve Compositional Pattern Produc
 
 Compositional Pattern Producing Networks, first proposed in [this paper](http://eplex.cs.ucf.edu/papers/stanley_aaaifs06.pdf) are a form of indirect encodings for genotype to phenotype mapping. 
 
-Due to these networks' fundamental functional basis, implementing them in Clojure using Propeller seems to be an obvious direction to move in.
+Due to these networks' fundamental functional basis, implementing them in Clojure using the PushGP evolutionary framework seems to be an obvious direction to move in.
 
 ## Random First Generation
 
