@@ -9,8 +9,7 @@
             [propeller.push.instructions.polymorphic]
             [quil.core :as q]))
 
-(def population-size 9)
-(def max-initial-plushy-size 100)
+(def max-initial-plushy-size 500)
 
 (def instructions
   (list :in1
@@ -39,6 +38,11 @@
        (* 2)
        (dec)
        (math/abs)
+       (* 255)
+       (math/ceil)))
+
+(defn output->pixel-color-basic [num]
+  (->> num
        (* 255)
        (math/ceil)))
 
