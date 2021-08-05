@@ -10,7 +10,7 @@ Due to these networks' fundamental functional basis, implementing them in Clojur
 
 ## Random First Generation
 
-![random-4](/assets/4-random.png)
+![random-64](/assets/64-random.png)
 
 ## Usage
 
