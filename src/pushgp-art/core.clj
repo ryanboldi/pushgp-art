@@ -5,27 +5,20 @@
 
 (defn setup []
   ; Set frame rate to 30 frames per second.
-  (q/frame-rate 30)
-  ; Set color mode to HSB (HSV) instead of default RGB.
-  (q/color-mode :hsb)
-  ; setup function returns initial state. It contains
-  ; circle color and position.
-  {:color 0
-   :angle 0}
-  )
+  (q/frame-rate 1))
+
 
 (defn draw [_]
   (q/background 255)
-(let [im1 (utils/plushy->image (utils/random-plushy))
-      im2 (utils/plushy->image (utils/random-plushy))
-      im3 (utils/plushy->image (utils/random-plushy))
-      im4 (utils/plushy->image (utils/random-plushy))
-      im5 (utils/plushy->image (utils/random-plushy))]
-  (q/image im1 0 0)
-  (q/image im2 100 0)
-  (q/image im3 200 0)
-  (q/image im4 300 0)
-  (q/image im5 400 0))
+  
+  ;(let [images (->> (repeatedly 10 utils/random-plushy)
+ ;                   (map #(utils/plushy->image % 50)))]
+    ;(dotimes [i 10]
+   ;   (q/image (nth i images) (* 50 i) 0)))
+  (q/image (utils/plushy->image (utils/random-plushy) 100) 0 0)
+  (q/image (utils/plushy->image (utils/random-plushy) 100) 0 100)
+  (q/image (utils/plushy->image (utils/random-plushy) 100) 100 0)
+  (q/image (utils/plushy->image (utils/random-plushy) 100) 100 100)
   (q/no-loop))
 
 
