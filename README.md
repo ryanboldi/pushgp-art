@@ -8,6 +8,10 @@ Compositional Pattern Producing Networks, first proposed in [this paper](http://
 
 Due to these networks' fundamental functional basis, implementing them in Clojure using Propeller seems to be an obvious direction to move in.
 
+## Random First Generation
+
+![random-4](/assets/4-random.png)
+
 ## Usage
 
 LightTable - open `core.clj` and press `Ctrl+Shift+Enter` to evaluate the file.
