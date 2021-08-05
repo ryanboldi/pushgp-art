@@ -10,7 +10,7 @@
             [quil.core :as q]))
 
 (def population-size 9)
-(def max-initial-plushy-size 1000)
+(def max-initial-plushy-size 100)
 
 (def instructions
   (list :in1
@@ -56,6 +56,7 @@
                        push-program
                        (assoc state/empty-state :input {:in1 normalized-x :in2 normalized-y})
                        100)
-                      :float)]
-          (q/set-pixel im x y (q/color (output->pixel-color output))))))
+                      :float)
+              float-output (if (float? output) output 0)]
+          (q/set-pixel im x y (q/color (output->pixel-color float-output))))))
     im))
