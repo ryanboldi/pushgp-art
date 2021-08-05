@@ -8,6 +8,5 @@ pom.xml.asc
 /.lein-*
 /.nrepl-port
 *.calva-repl
-.lsp/sqlite.db
+.lsp/
 *.db
-.lsp/sqlite.db
