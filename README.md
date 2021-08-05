@@ -24,5 +24,4 @@ REPL - run `(require 'pushgp-art.core)`.
 
 Copyright © 2021 Ryan Boldi
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the Eclipse Public License 1.0
