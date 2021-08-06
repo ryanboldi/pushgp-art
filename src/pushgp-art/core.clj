@@ -10,19 +10,31 @@
     {:plushies plushies
      :images images}))
 
+(def plushies (repeatedly 4 utils/random-plushy))
+(def children (utils/get-new-plushies plushies '(0 1 2 3)))
+
 (defn update [state] state)
 
 (defn draw [old-state]
   (q/background 255)
-  (let [images (:images old-state)]
-   (dotimes [i (count images)]
-    (q/resize (nth images i) 128 128)
-      (q/image (nth images i) (* (mod i 4) 128) (* (quot i 4) 128))))
+  (q/image (utils/plushy->image (first plushies) 128) 0 0)
+  (q/image (utils/plushy->image (second plushies) 128) 128 0)
+  (q/image (utils/plushy->image (nth plushies 2) 128) 256 0)
+  (q/image (utils/plushy->image (nth plushies 3) 128) 384 0)
+  (q/image (utils/plushy->image (first children) 128) 0 128)
+  (q/image (utils/plushy->image (second children) 128) 128 128)
+  (q/image (utils/plushy->image (nth children 2) 128) 256 128)
+  (q/image (utils/plushy->image (nth children 3) 128) 384 128)
+  ;(let [images (:images old-state)]
+  ; (dotimes [i (count images)]
+  ;  (q/resize (nth images i) 128 128)
+  ;    (q/image (nth images i) (* (mod i 4) 128) (* (quot i 4) 128))))
+  (q/save "assets/4-parents-4-children-cross-1.png")
   (q/no-loop))
 
 (q/defsketch pushgp-art
   :title "PushGP Art"
-  :size [512 512]
+  :size [512 256]
   ; setup function called only once, during sketch initialization.
   :setup setup
   :draw draw
