@@ -7,6 +7,7 @@
             [propeller.push.instructions.input-output]
             [propeller.push.instructions.code]
             [propeller.push.instructions.polymorphic]
+            [propeller.variation :as variation]
             [quil.core :as q]))
 
 (def max-initial-plushy-size 500)
@@ -64,3 +65,15 @@
               float-output (if (float? output) output 0)]
           (q/set-pixel im x y (q/color (output->pixel-color float-output))))))
     im))
+
+(defn get-new-plushies
+  "crosses over the plushies at the selected indices"
+  [plushies selected-indices]
+  (let [pop-size (count plushies)
+        parents (map (partial nth plushies) selected-indices)]
+    (println parents)
+    (loop [children '()]
+      (println children pop-size)
+      (if (= (count children) pop-size)
+        children
+        (recur (conj children (variation/crossover (rand-nth parents) (rand-nth parents))))))))
