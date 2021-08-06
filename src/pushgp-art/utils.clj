@@ -75,3 +75,9 @@
       (if (= (count children) pop-size)
         children
         (recur (conj children (variation/crossover (rand-nth parents) (rand-nth parents))))))))
+
+(defn mutate-plushy "mutates a random plushy"
+  [plushy]
+  (if (< (rand) 0.7)
+    (variation/uniform-replacement plushy)
+    (variation/uniform-addition plushy)))
