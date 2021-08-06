@@ -10,7 +10,7 @@
             [propeller.variation :as variation]
             [quil.core :as q]))
 
-(def max-initial-plushy-size 500)
+(def max-initial-plushy-size 100)
 
 (def instructions
   (list :in1
@@ -77,7 +77,7 @@
         (recur (conj children (variation/crossover (rand-nth parents) (rand-nth parents))))))))
 
 (defn mutate-plushy "mutates a random plushy"
-  [plushy]
+  [plushy umad-rate]
   (if (< (rand) 0.7)
-    (variation/uniform-replacement plushy)
-    (variation/uniform-addition plushy)))
+    (variation/uniform-replacement plushy instructions umad-rate)
+    (variation/uniform-addition plushy instructions umad-rate)))
