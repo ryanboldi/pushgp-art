@@ -71,9 +71,7 @@
   [plushies selected-indices]
   (let [pop-size (count plushies)
         parents (map (partial nth plushies) selected-indices)]
-    (println parents)
     (loop [children '()]
-      (println children pop-size)
       (if (= (count children) pop-size)
         children
         (recur (conj children (variation/crossover (rand-nth parents) (rand-nth parents))))))))
