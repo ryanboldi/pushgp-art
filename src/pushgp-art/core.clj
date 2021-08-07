@@ -1,43 +1,38 @@
 (ns pushgp-art.core
   (:require [quil.core :as q]
             [quil.middleware :as m]
+            [clojure.set]
             [pushgp-art.utils :as utils]))
 
 (defn setup []
-  (q/frame-rate 1)
-  ;(let [plushies (repeatedly 16 utils/random-plushy)
-  ;      images (map #(utils/plushy->image % 50) plushies)]
-   ; {:plushies plushies
-    ; :images images}))
-)
-
-(def plushies (repeatedly 4 utils/random-plushy))
-(def children (map #(utils/mutate-plushy % 0.7) plushies))
+  (q/frame-rate 30)
+  (let [plushies (repeatedly 16 utils/random-plushy)
+        images (map #(utils/plushy->image % 32) plushies)]
+    {:plushies plushies
+     :images images
+     :selected-indices #{}}))
 
 (defn update [state] state)
 
+(defn mouse-clicked 
+  ([state event]
+  (let [mx (:x event)
+        my (:y event)]
+    (update-in state [:selected-indices] #(clojure.set/union % (hash-set (utils/mouse-pos->index 128 4 mx my)))))))
+
 (defn draw [old-state]
   (q/background 255)
-  (q/image (utils/plushy->image (first plushies) 128) 0 0)
-  (q/image (utils/plushy->image (second plushies) 128) 128 0)
-  (q/image (utils/plushy->image (nth plushies 2) 128) 256 0)
-  (q/image (utils/plushy->image (nth plushies 3) 128) 384 0)
-  (q/image (utils/plushy->image (first children) 128) 0 128)
-  (q/image (utils/plushy->image (second children) 128) 128 128)
-  (q/image (utils/plushy->image (nth children 2) 128) 256 128)
-  (q/image (utils/plushy->image (nth children 3) 128) 384 128)
-  ;(let [images (:images old-state)]
-  ; (dotimes [i (count images)]
-  ;  (q/resize (nth images i) 128 128)
-  ;    (q/image (nth images i) (* (mod i 4) 128) (* (quot i 4) 128))))
-  (q/save "assets/4-pure-mutation-07.png")
-  (q/no-loop))
+  (println (:selected-indices old-state))
+  (let [images (:images old-state)]
+    (dotimes [i (count images)]
+      (q/resize (nth images i) 128 128)
+      (q/image (nth images i) (* (mod i 4) 128) (* (quot i 4) 128)))))
 
 (q/defsketch pushgp-art
   :title "PushGP Art"
-  :size [512 256]
-  ; setup function called only once, during sketch initialization.
+  :size [512 512]
   :setup setup
   :draw draw
   :update update
+  :mouse-clicked mouse-clicked
   :middleware [m/fun-mode])
