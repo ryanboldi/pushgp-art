@@ -19,11 +19,13 @@
 
 (defn key-pressed [state event]
   (if (= 10 (:key-code event))
-    (let [new-children (utils/get-new-plushies (:plushies state) (:selected-indices state))
-          new-images (map #(utils/plushy->image % 64) new-children)]
-      {:plushies new-children
-       :images new-images
-       :selected-indices #{}})
+    (do 
+      (q/save-frame "/assets/evolution-example/######.png")
+      (let [new-children (utils/get-new-plushies (:plushies state) (:selected-indices state))
+            new-images (map #(utils/plushy->image % 64) new-children)]
+        {:plushies new-children
+         :images new-images
+         :selected-indices #{}}))
     state))
 
 (defn draw [old-state]
