@@ -22,11 +22,14 @@
 
 (defn draw [old-state]
   (q/background 255)
-  (println (:selected-indices old-state))
   (let [images (:images old-state)]
     (dotimes [i (count images)]
       (q/resize (nth images i) 128 128)
-      (q/image (nth images i) (* (mod i 4) 128) (* (quot i 4) 128)))))
+      (q/image (nth images i) (* (mod i 4) 128) (* (quot i 4) 128))))
+  (q/no-fill)
+  (q/stroke 255 0 0)
+  (doseq [i (apply vector (:selected-indices old-state))]
+    (q/rect (* (mod i 4) 128) (* (quot i 4) 128) 128 128)))
 
 (q/defsketch pushgp-art
   :title "PushGP Art"
