@@ -81,3 +81,8 @@
   (if (< (rand) 0.7)
     (variation/uniform-replacement plushy instructions umad-rate)
     (variation/uniform-addition plushy instructions umad-rate)))
+
+(defn mouse-pos->index [image-width images-per-row mouse-x mouse-y]
+  (let [x-ind (q/floor (/ mouse-x image-width))
+        y-ind (q/floor (/ mouse-y image-width))]
+    (+ x-ind (* y-ind images-per-row))))
