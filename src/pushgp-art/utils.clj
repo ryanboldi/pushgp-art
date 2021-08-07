@@ -66,6 +66,18 @@
           (q/set-pixel im x y (q/color (output->pixel-color float-output))))))
     im))
 
+(defn mutate-plushy "mutates a random plushy"
+  [plushy umad-rate]
+  (if (< (rand) 0.7)
+    (variation/uniform-replacement plushy instructions umad-rate)
+    (variation/uniform-addition plushy instructions umad-rate)))
+
+(defn make-child [parent-1 parent-2]
+  (let [child (variation/crossover parent-1 parent-2)]
+    (if (< (rand) 0.5)
+      (mutate-plushy child 0.3)
+      child)))
+
 (defn get-new-plushies
   "crosses over the plushies at the selected indices"
   [plushies selected-indices]
@@ -74,13 +86,7 @@
     (loop [children '()]
       (if (= (count children) pop-size)
         children
-        (recur (conj children (variation/crossover (rand-nth parents) (rand-nth parents))))))))
-
-(defn mutate-plushy "mutates a random plushy"
-  [plushy umad-rate]
-  (if (< (rand) 0.7)
-    (variation/uniform-replacement plushy instructions umad-rate)
-    (variation/uniform-addition plushy instructions umad-rate)))
+        (recur (conj children (make-child (rand-nth parents) (rand-nth parents))))))))
 
 (defn mouse-pos->index [image-width images-per-row mouse-x mouse-y]
   (let [x-ind (q/floor (/ mouse-x image-width))
