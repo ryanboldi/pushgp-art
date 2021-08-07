@@ -14,11 +14,19 @@
 
 (defn update [state] state)
 
-(defn mouse-clicked 
-  ([state event]
+(defn mouse-clicked [state event]
   (let [mx (:x event)
         my (:y event)]
-    (update-in state [:selected-indices] #(clojure.set/union % (hash-set (utils/mouse-pos->index 128 4 mx my)))))))
+    (update-in state [:selected-indices] #(clojure.set/union % (hash-set (utils/mouse-pos->index 128 4 mx my))))))
+
+(defn key-pressed [state event]
+  (if (= 10 (:key-code event))
+    (let [new-children (utils/get-new-plushies (:plushies state) (:selected-indices state))
+          new-images (map #(utils/plushy->image % 32) new-children)]
+      {:plushies new-children
+       :images new-images
+       :selected-indices #{}})
+    state))
 
 (defn draw [old-state]
   (q/background 255)
@@ -28,7 +36,7 @@
       (q/image (nth images i) (* (mod i 4) 128) (* (quot i 4) 128))))
   (q/no-fill)
   (q/stroke 255 0 0)
-  (doseq [i (apply vector (:selected-indices old-state))]
+  (doseq [i (:selected-indices old-state)]
     (q/rect (* (mod i 4) 128) (* (quot i 4) 128) 128 128)))
 
 (q/defsketch pushgp-art
@@ -38,4 +46,5 @@
   :draw draw
   :update update
   :mouse-clicked mouse-clicked
+  :key-pressed key-pressed
   :middleware [m/fun-mode])
