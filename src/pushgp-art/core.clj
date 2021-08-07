@@ -12,8 +12,6 @@
      :images images
      :selected-indices #{}}))
 
-(defn update [state] state)
-
 (defn mouse-clicked [state event]
   (let [mx (:x event)
         my (:y event)]
@@ -44,7 +42,6 @@
   :size [512 512]
   :setup setup
   :draw draw
-  :update update
   :mouse-clicked mouse-clicked
   :key-pressed key-pressed
   :middleware [m/fun-mode])
