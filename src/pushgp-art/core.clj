@@ -7,7 +7,7 @@
 (defn setup []
   (q/frame-rate 30)
   (let [plushies (repeatedly 16 utils/random-plushy)
-        images (map #(utils/plushy->image % 32) plushies)]
+        images (map #(utils/plushy->image % 64) plushies)]
     {:plushies plushies
      :images images
      :selected-indices #{}}))
@@ -20,7 +20,7 @@
 (defn key-pressed [state event]
   (if (= 10 (:key-code event))
     (let [new-children (utils/get-new-plushies (:plushies state) (:selected-indices state))
-          new-images (map #(utils/plushy->image % 32) new-children)]
+          new-images (map #(utils/plushy->image % 64) new-children)]
       {:plushies new-children
        :images new-images
        :selected-indices #{}})
