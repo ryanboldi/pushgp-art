@@ -8,6 +8,7 @@
             [propeller.push.instructions.code]
             [propeller.push.instructions.polymorphic]
             [propeller.variation :as variation]
+            [pushgp-art.instructions]
             [quil.core :as q]))
 
 (def max-initial-plushy-size 100)
@@ -26,6 +27,9 @@
         :float_max
         :float_lt
         :float_gt
+        :float_gauss
+        :float_mod1
+        :float_sigmoid
         :exec_dup
         :exec_if
         'close
