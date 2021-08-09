@@ -7,10 +7,11 @@
 (defn setup []
   (q/frame-rate 30)
   (let [plushies (repeatedly 16 utils/random-plushy)
-        images (map #(utils/plushy->image % 128) plushies)]
+        images (map #(utils/plushy->image % 64) plushies)]
     {:plushies plushies
      :images images
-     :selected-indices #{}}))
+     :selected-indices #{}
+     :save-index 0}))
 
 (defn mouse-clicked [state event]
   (let [mx (:x event)
@@ -18,15 +19,22 @@
     (update-in state [:selected-indices] #(clojure.set/union % (hash-set (utils/mouse-pos->index 128 4 mx my))))))
 
 (defn key-pressed [state event]
-  (if (= 10 (:key-code event))
-    (do 
-      (q/save-frame "/assets/evolution-example-3/######.png")
+  (cond
+    (= 10 (:key-code event))
+    (do
+      ;(q/save-frame "/assets/evolution-example-3/######.png")
       (let [new-children (utils/get-new-plushies (:plushies state) (:selected-indices state))
-            new-images (map #(utils/plushy->image % 128) new-children)]
+            new-images (map #(utils/plushy->image % 64) new-children)]
         {:plushies new-children
          :images new-images
-         :selected-indices #{}}))
-    state))
+         :selected-indices #{}
+         :save-index (:save-index state)}))
+    (= 83 (:key-code event))
+    (let [index (utils/mouse-pos->index 128 4 (q/mouse-x) (q/mouse-y))
+          image-number (:save-index state)]
+      (spit (str "./plushies/plushy" image-number ".txt") (apply list (nth (:plushies state) index)))
+      (update-in state [:save-index] inc))
+    :else (do (println (:key-code event)) state)))
 
 (defn draw [old-state]
   (q/background 255)
