@@ -34,7 +34,7 @@
           image-number (:save-index state)]
       (spit (str "./plushies/plushy" image-number ".txt") (apply list (nth (:plushies state) index)))
       (update-in state [:save-index] inc))
-    :else (do (println (:key-code event)) state)))
+    :else state))
 
 (defn draw [old-state]
   (q/background 255)
