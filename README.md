@@ -16,6 +16,8 @@ In short, a Push program is a series of instructions that are carried out on a s
 
 The push implementation that was used in this project was written in Clojure, a Lisp dialect and can be found here: https://github.com/lspector/propeller.
 
+For this project, 3 new instructions were added to the propeller library. Namely, sigmoid, gaussian and mod(0.5, x). Adding these functions helped promote more symmetry and ragged periodicity.
+
 <h1 align=center> Compositional Pattern Producing Networks (CPPNs) </h1>
 
 ### What?
@@ -61,6 +63,36 @@ And finally, 1024x1024:
 
 ----
 
+<h1 align=center> Evolution of Art </h1>
+
+This project is focused on various forms of open ended evolution of CPPNs. There are two ways that CPPNs described by push programs are able to evolve: Mutation and Crossover.
+
+### Mutation
+ The following images have two rows, the first row contains the parents, and the second row contains the children that are produced from solely mutating their respective parent. 
+ 
+ For this mutation, a mutation rate of 0.5 was used:
+
+![4 Mutation only 0.5](assets/4-pure-mutation-05.png)
+
+Here is an example with a mutation rate of 0.1:
+
+![4 Mutation only 0.1](assets/4-pure-mutation-01.png)
+
+and here is one with a mutation rate of 0.05:
+![4 Mutation only 0.01](assets/4-pure-mutation-005.png)
+
+### Crossover
+
+Crossover is the mixing of two plushies to produce a genetically similar one. The following images show this taking place.
+
+In this image, all 4 parents are randomly selected from to crossover to produce the children below:
+
+![4-parents-4-children-cross](assets/4-parents-4-children-cross.png)
+
+In this one, only the first two parents are crossed to produce the 4 children:
+
+![only first 2 parents crossed](assets/only-first-2-parents-crossed.png)
+
 ## Usage
 
 LightTable - open `core.clj` and press `Ctrl+Shift+Enter` to evaluate the file.
@@ -68,6 +100,18 @@ LightTable - open `core.clj` and press `Ctrl+Shift+Enter` to evaluate the file.
 Emacs - run cider, open `core.clj` and press `C-c C-k` to evaluate the file.
 
 REPL - run `(require 'pushgp-art.core)`.
+
+Once the window is displaying, click on as many images as you would like to crossover. Selected images will have a red outline:
+
+<img src="assets/evolution-example/000993.png" width="512"/>
+
+ When ready, press <kbd> Enter </kbd>. Wait 1-2 minutes depending on the image resolution you chose. The next generation should display. Rinse and repeat.
+
+ <img src="assets/evolution-example/001398.png" width="512"/>
+
+If there is a specific image that you like and would like to save, hover over it with your mouse and press <kbd> s </kbd>. This plushy will be saved into plushies/plushy#.txt .Make sure you save this somewhere safe. 
+
+To visualize a saved plushy, see visualize.clj, set the resolution and file path, and wait!
 
 ## License
 
