@@ -8,7 +8,6 @@ Compositional Pattern Producing Networks (CPPNs), first proposed in [this paper]
 
 Due to these networks' fundamental functional basis, implementing them in Clojure using the PushGP evolutionary framework seems to be an obvious direction to move in.
 
----
 <h1 align=center> Push Genetic Programming (PushGP) </h1>
 
 'Push' is a programming language that was specifically designed for use in evolutionary computation. For a quick introduction, [this](https://www.youtube.com/watch?v=VGJWlSC0gl4&t=13s) youtube video is a great resource.
@@ -17,11 +16,9 @@ In short, a Push program is a series of instructions that are carried out on a s
 
 The push implementation that was used in this project was written in Clojure, a Lisp dialect and can be found here: https://github.com/lspector/propeller.
 
----
 <h1 align=center> Compositional Pattern Producing Networks (CPPNs) </h1>
 
 ### What?
-----
 For this project's use case, a CPPN can be thought of as a function of two variables:
 
 CPPN(x, y) = output
@@ -29,14 +26,12 @@ CPPN(x, y) = output
 Where (x,y) represents the coordinates of a single pixel in the outputted image, and the output is a pixel greyscale value from 0 to 1 to color this pixel with.
 
 ### How?
----
 
 The genotype of these CPPNs are stored as **plushy** (linear push) programs. The push interpretter converts these plushies into a set of functional push programs, each representing a CPPN. This CPPN is then run w*w times (once for each pixel in a w x w pixel image), and the output is displayed. Below is an example of 16 completely random 128x128 images produced by 16 different CPPNs from push programs:
 
 ![example 1](assets/example-1.png)
 
 ### Why?
-----
 
 This **indirect encoding** (called so due to the non-one-to-one mapping between genotype and phenotype), allows for a significant amount of compression of information. This compression is important when considering artificial life and how evolution took place in our own history. Things like bilateral symmetry, repeating patterns, or repetition with slight variation, are all due to certain genes being reused in special ways throughout our phenotype. This might explain how the ~30,000 genes in the human body are able to encode the 86+ billion neurons in the human brain (let alone the rest of the body's functions).
 
