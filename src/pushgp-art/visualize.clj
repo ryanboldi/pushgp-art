@@ -9,20 +9,21 @@
 
 (defn setup []
   (q/frame-rate 1)
-  (let [image-name "zig-zag" image-width 512
+  (let [image-name "../assets/examples/plushy0" image-width 1024
         plushy (read-string (slurp (str "./plushies/" image-name ".txt")))]
     {:plushy plushy
      :image (utils/plushy->image plushy image-width)}))
 
 (defn draw [old-state]
   (q/background 255)
-  (q/resize (:image old-state) 512 512)
+  (q/resize (:image old-state) 1024 1024)
   (q/image (:image old-state) 0 0)
+  (q/save-frame "/assets/examples/512x512.png")
   (q/no-loop))
 
 (q/defsketch pushgp-art
   :title "PushGP Art"
-  :size [512 512]
+  :size [1024 1024]
   :setup setup
   :draw draw
   :middleware [m/fun-mode])
