@@ -9,7 +9,7 @@
 
 (defn setup []
   (q/frame-rate 1)
-  (let [image-name "../assets/examples/plushy0" image-width 1024
+  (let [image-name "zig-zag" image-width 1024
         plushy (read-string (slurp (str "./plushies/" image-name ".txt")))]
     {:plushy plushy
      :image (utils/plushy->image plushy image-width)}))
