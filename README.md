@@ -37,7 +37,7 @@ The genotype of these CPPNs are stored as **plushy** (linear push) programs. The
 
 This **indirect encoding** (called so due to the non-one-to-one mapping between genotype and phenotype), allows for a significant amount of compression of information. This compression is important when considering artificial life and how evolution took place in our own history. Things like bilateral symmetry, repeating patterns, or repetition with slight variation, are all due to certain genes being reused in special ways throughout our phenotype. This might explain how the ~30,000 genes in the human body are able to encode the 86+ billion neurons in the human brain (let alone the rest of the body's functions).
 
-This means that we are able to use a relatively small CPPNs (100 or so push instructions) to encode images with more than 1,048,576 pixels (1024x1024).
+This means that we are able to use a relatively small CPPN (100 or so push instructions) to encode images with more than 1,048,576 pixels (1024x1024).
 
 There is, in fact, no theoretical maximum resolution for the output of the CPPN. The only limiting factor is that the higher the resolution, the more times the CPPN must be run to generate the output. The interesting thing is that a trained CPPN will output the same image to higher resolutions __without any further evolution__. This is why images should be evolved in lower resolution (64x64 or 128x128), and then can be displayed at higher resolutions once a good solution is found.
 
@@ -79,6 +79,7 @@ Here is an example with a mutation rate of 0.1:
 ![4 Mutation only 0.1](assets/4-pure-mutation-01.png)
 
 and here is one with a mutation rate of 0.05:
+
 ![4 Mutation only 0.01](assets/4-pure-mutation-005.png)
 
 ### Crossover
